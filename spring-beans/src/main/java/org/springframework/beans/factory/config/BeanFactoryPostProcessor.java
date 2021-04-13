@@ -19,20 +19,16 @@ package org.springframework.beans.factory.config;
 import org.springframework.beans.BeansException;
 
 /**
- * Factory hook that allows for custom modification of an application context's
- * bean definitions, adapting the bean property values of the context's underlying
- * bean factory.
+ * 表示bean定义已经被加载到容器中了，但是bean还未被实例化。允许对Bean定义进行自定义修改
+ * <p>
+ * BeanFactoryPostProcessor可以与Bean定义进行交互并对其进行修改，但不能与Bean实例进行交互。
+ * 这样做可能会导致bean实例化过早，从而造成意想不到的副作用。
+ * 如果需要和bean实例交互，请考虑改为实现{@link BeanPostProcessor}。
  *
  * <p>Useful for custom config files targeted at system administrators that
  * override bean properties configured in the application context. See
  * {@link PropertyResourceConfigurer} and its concrete implementations for
  * out-of-the-box solutions that address such configuration needs.
- *
- * <p>A {@code BeanFactoryPostProcessor} may interact with and modify bean
- * definitions, but never bean instances. Doing so may cause premature bean
- * instantiation, violating the container and causing unintended side-effects.
- * If bean instance interaction is required, consider implementing
- * {@link BeanPostProcessor} instead.
  *
  * <h3>Registration</h3>
  * <p>An {@code ApplicationContext} auto-detects {@code BeanFactoryPostProcessor}
@@ -55,18 +51,16 @@ import org.springframework.beans.BeansException;
  *
  * @author Juergen Hoeller
  * @author Sam Brannen
- * @since 06.07.2003
  * @see BeanPostProcessor
  * @see PropertyResourceConfigurer
+ * @since 06.07.2003
  */
 @FunctionalInterface
 public interface BeanFactoryPostProcessor {
 
 	/**
-	 * Modify the application context's internal bean factory after its standard
-	 * initialization. All bean definitions will have been loaded, but no beans
-	 * will have been instantiated yet. This allows for overriding or adding
-	 * properties even to eager-initializing beans.
+	 * 所有bean定义都已经被加载，但尚未实例化任何bean，可以用于覆盖或添加属性，甚至可以立即初始化bean
+	 *
 	 * @param beanFactory the bean factory used by the application context
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 */

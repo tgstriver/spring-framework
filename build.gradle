@@ -12,14 +12,14 @@ plugins {
 	id "com.github.ben-manes.versions" version '0.24.0'
 }
 
-// 新加配置，需要配置在plugins{} 下面
+
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
     maven { url 'http://repo.springsource.org/plugins-release'}
 }
-// 新加配置，需要配置在plugins{} 下面
+
 allprojects {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
